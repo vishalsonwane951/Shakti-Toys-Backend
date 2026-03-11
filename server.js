@@ -19,7 +19,6 @@ const app = express();
 connectDB();
 
 
-
 // Dynamic CORS origin
 const whitelist = [
   'http://localhost:3000',                  // local dev
@@ -40,6 +39,11 @@ app.use(cors({
   credentials: true
 }));
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9ee0776 (-)
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

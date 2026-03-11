@@ -33,7 +33,8 @@ export const getProduct = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const images = req.files ? req.files.map(f => `/uploads/${f.filename}`) : [];
+    const BASE_URL = process.env.BACKEND_URL || 'http://localhost:5000';
+    const images = req.files ? req.files.map(f => `${BASE_URL}/uploads/${f.filename}`) : [];
     const specs = req.body.specifications ? JSON.parse(req.body.specifications) : [];
     const tags = req.body.tags ? JSON.parse(req.body.tags) : [];
     const product = await Product.create({ ...req.body, images, specifications: specs, tags });
