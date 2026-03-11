@@ -19,7 +19,7 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: 'https://shaktitoyss.netlify.app',
+  origin: 'https://shakti-toys-frontend-a1k1d1sku-vishal-sonwanes-projects.vercel.app/',
   credentials: true
 }));
 
