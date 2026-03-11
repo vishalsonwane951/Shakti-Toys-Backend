@@ -40,11 +40,6 @@ app.use(cors({
   credentials: true
 }));
 
-// Example route
-app.get('/api/products', (req, res) => {
-  res.json({ msg: 'Products route works' });
-});
-
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
