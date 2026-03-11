@@ -18,7 +18,16 @@ dotenv.config();
 const app = express();
 connectDB();
 
-app.use(cors({ origin: 'https://shaktitoyss.netlify.app', credentials: true }));
+const allowedOrigin =
+  process.env.NODE_ENV === 'production'
+    ? 'https://shaktitoyss.netlify.app' // your deployed frontend
+    : 'http://localhost:3000';          // local frontend
+
+app.use(cors({
+  origin: allowedOrigin,
+  credentials: true // allow cookies / credentials
+}));
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
