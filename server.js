@@ -18,7 +18,7 @@ dotenv.config();
 const app = express();
 connectDB();
 
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors({ origin: 'https://shaktitoyss.netlify.app', credentials: true }));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
