@@ -18,26 +18,8 @@ dotenv.config();
 const app = express();
 connectDB();
 
-
-const whitelist = [
-  'http://localhost:3000',
-  'http://localhost:5173',                          // ✅ Add Vite dev port
-  'https://shaktitoyss.netlify.app',
-  /https:\/\/[a-z0-9-]+--shaktitoyss\.netlify\.app/ // ✅ Allow ALL Netlify preview URLs
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    
-    // ✅ Check both strings and regex patterns
-    const allowed = whitelist.some(w => 
-      typeof w === 'string' ? w === origin : w.test(origin)
-    );
-
-    if (allowed) callback(null, true);
-    else callback(new Error(`CORS policy: origin ${origin} not allowed`));
-  },
+  origin: 'https://shaktitoyss.netlify.app',
   credentials: true
 }));
 
