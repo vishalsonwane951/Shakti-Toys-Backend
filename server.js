@@ -39,11 +39,6 @@ app.use(cors({
   credentials: true
 }));
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9ee0776 (-)
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
