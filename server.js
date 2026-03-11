@@ -19,22 +19,24 @@ const app = express();
 connectDB();
 
 
-// Dynamic CORS origin
 const whitelist = [
-  'http://localhost:3000',                  // local dev
-  'https://shaktitoyss.netlify.app'        // production frontend
+  'http://localhost:3000',
+  'http://localhost:5173',                          // ✅ Add Vite dev port
+  'https://shaktitoyss.netlify.app',
+  /https:\/\/[a-z0-9-]+--shaktitoyss\.netlify\.app/ // ✅ Allow ALL Netlify preview URLs
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // allow requests with no origin (like Postman)
     if (!origin) return callback(null, true);
+    
+    // ✅ Check both strings and regex patterns
+    const allowed = whitelist.some(w => 
+      typeof w === 'string' ? w === origin : w.test(origin)
+    );
 
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error(`CORS policy: origin ${origin} not allowed`));
-    }
+    if (allowed) callback(null, true);
+    else callback(new Error(`CORS policy: origin ${origin} not allowed`));
   },
   credentials: true
 }));
