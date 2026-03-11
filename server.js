@@ -18,8 +18,6 @@ dotenv.config();
 const app = express();
 connectDB();
 
-import express from 'express';
-import cors from 'cors';
 
 
 // Dynamic CORS origin
