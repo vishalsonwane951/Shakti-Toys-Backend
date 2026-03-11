@@ -18,15 +18,34 @@ dotenv.config();
 const app = express();
 connectDB();
 
-const allowedOrigin =
-  process.env.NODE_ENV === 'production'
-    ? 'https://shaktitoyss.netlify.app' // your deployed frontend
-    : 'http://localhost:3000';          // local frontend
+import express from 'express';
+import cors from 'cors';
+
+
+// Dynamic CORS origin
+const whitelist = [
+  'http://localhost:3000',                  // local dev
+  'https://shaktitoyss.netlify.app'        // production frontend
+];
 
 app.use(cors({
-  origin: allowedOrigin,
-  credentials: true // allow cookies / credentials
+  origin: function (origin, callback) {
+    // allow requests with no origin (like Postman)
+    if (!origin) return callback(null, true);
+
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS policy: origin ${origin} not allowed`));
+    }
+  },
+  credentials: true
 }));
+
+// Example route
+app.get('/api/products', (req, res) => {
+  res.json({ msg: 'Products route works' });
+});
 
 app.use(morgan('dev'));
 app.use(express.json());
