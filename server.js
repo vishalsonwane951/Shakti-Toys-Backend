@@ -19,7 +19,7 @@ const app = express();
 connectDB();
 
 app.use(cors({
-  origin: 'https://shakti-toys-frontend-a1k1d1sku-vishal-sonwanes-projects.vercel.app',
+  origin: 'https://shakti-toys-frontend-ce3s2be2f-vishal-sonwanes-projects.vercel.app', // https://shakti-toys-frontend-a1k1d1sku-vishal-sonwanes-projects.vercel.app
   credentials: true
 }));
 
